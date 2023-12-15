@@ -12,7 +12,7 @@ namespace CarMvc
 
         public SqlDbContext(IConfiguration configuration)
         {
-            this._configuration = configuration;
+            _configuration = configuration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
