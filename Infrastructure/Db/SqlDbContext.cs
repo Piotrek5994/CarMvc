@@ -7,17 +7,11 @@ namespace CarMvc
 {
     public class SqlDbContext : DbContext
     {
-        private readonly IConfiguration _configuration;
         DbSet<Car> Cars { get; set; }
-
-        public SqlDbContext(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite(_configuration.GetConnectionString("LocalDb"));
+            options.UseSqlite("Data Source=C:\\Users\\piotr\\Desktop\\Projekty C#\\CarMvc\\car.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
