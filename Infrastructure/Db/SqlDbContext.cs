@@ -1,7 +1,5 @@
 ﻿using CarMvc.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
 
 namespace CarMvc
 {
@@ -15,6 +13,10 @@ namespace CarMvc
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Car>().HasData(
+            new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High, Owner = "Jan Nowak" },
+            new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High, Owner = "Anna Kowalska" }
+            );
         }
     }
 }
