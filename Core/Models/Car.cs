@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarMvc.Models
 {
@@ -11,7 +12,7 @@ namespace CarMvc.Models
         public int Power { get; set; }
         public string Motor { get; set; }
         public string RegistrationNumber { get; set; }
-        public string Owner { get; set; }
+        public Organization Owner { get; set; }
         public Priority Priority { get; set; }
     }
     public enum Priority
