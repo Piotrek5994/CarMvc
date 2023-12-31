@@ -16,35 +16,38 @@ namespace Infrastructure.Migrations
                 name: "Organization",
                 columns: table => new
                 {
-                    OrgId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    NIP = table.Column<string>(type: "TEXT", nullable: false)
+                    NIP = table.Column<string>(type: "TEXT", nullable: false),
+                    AdrId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Organization", x => x.OrgId);
+                    table.PrimaryKey("PK_Organization", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Address",
                 columns: table => new
                 {
-                    AdrId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Street = table.Column<string>(type: "TEXT", nullable: false),
                     Number = table.Column<int>(type: "INTEGER", nullable: false),
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     State = table.Column<string>(type: "TEXT", nullable: false),
-                    Country = table.Column<string>(type: "TEXT", nullable: false)
+                    Country = table.Column<string>(type: "TEXT", nullable: false),
+                    OrgId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.AdrId);
+                    table.PrimaryKey("PK_Address", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_Organization_AdrId",
-                        column: x => x.AdrId,
+                        name: "FK_Address_Organization_OrgId",
+                        column: x => x.OrgId,
                         principalTable: "Organization",
-                        principalColumn: "OrgId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -70,17 +73,26 @@ namespace Infrastructure.Migrations
                         name: "FK_Cars_Organization_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organization",
-                        principalColumn: "OrgId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Organization",
-                columns: new[] { "OrgId", "NIP", "Name" },
+                columns: new[] { "Id", "AdrId", "NIP", "Name" },
                 values: new object[,]
                 {
-                    { 1, "1234567890", "Organizacja A" },
-                    { 2, "0987654321", "Organizacja B" }
+                    { 1, 1, "1234567890", "Organizacja A" },
+                    { 2, 2, "0987654321", "Organizacja B" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Address",
+                columns: new[] { "Id", "City", "Country", "Number", "OrgId", "State", "Street" },
+                values: new object[,]
+                {
+                    { 1, "Miasto A", "Kraj A", 1, 1, "Stan A", "Ulica A" },
+                    { 2, "Miasto B", "Kraj B", 2, 2, "Stan B", "Ulica B" }
                 });
 
             migrationBuilder.InsertData(
@@ -91,6 +103,12 @@ namespace Infrastructure.Migrations
                     { 1, 1.3999999999999999, "Octavia", "Benzyna", 1, 100, 3, "Skoda", "ABC123" },
                     { 2, 1.3999999999999999, "A3", "Benzyna", 2, 100, 3, "Audi", "DEF456" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Address_OrgId",
+                table: "Address",
+                column: "OrgId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_OrganizationId",

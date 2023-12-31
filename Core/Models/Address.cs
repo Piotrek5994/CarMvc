@@ -8,12 +8,13 @@ namespace Core.Models
 {
     public class Address
     {
-        public int AdrId { get; set; }
+        public int Id { get; set; }
         public string Street { get; set; }
         public int Number { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
+        public int OrgId { get; set; }
         public Organization Organization { get; set; }
     }
 }

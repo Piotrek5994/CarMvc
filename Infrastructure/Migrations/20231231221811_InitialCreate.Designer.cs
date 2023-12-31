@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    [Migration("20231231203823_InitialCreate")]
+    [Migration("20231231221811_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -89,7 +89,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Models.Address", b =>
                 {
-                    b.Property<int>("AdrId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("City")
@@ -103,6 +104,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -111,15 +115,43 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AdrId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrgId")
+                        .IsUnique();
 
                     b.ToTable("Address");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Miasto A",
+                            Country = "Kraj A",
+                            Number = 1,
+                            OrgId = 1,
+                            State = "Stan A",
+                            Street = "Ulica A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Miasto B",
+                            Country = "Kraj B",
+                            Number = 2,
+                            OrgId = 2,
+                            State = "Stan B",
+                            Street = "Ulica B"
+                        });
                 });
 
             modelBuilder.Entity("Core.Models.Organization", b =>
                 {
-                    b.Property<int>("OrgId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdrId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("NIP")
@@ -130,20 +162,22 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("OrgId");
+                    b.HasKey("Id");
 
                     b.ToTable("Organization");
 
                     b.HasData(
                         new
                         {
-                            OrgId = 1,
+                            Id = 1,
+                            AdrId = 1,
                             NIP = "1234567890",
                             Name = "Organizacja A"
                         },
                         new
                         {
-                            OrgId = 2,
+                            Id = 2,
+                            AdrId = 2,
                             NIP = "0987654321",
                             Name = "Organizacja B"
                         });
@@ -164,7 +198,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Models.Organization", "Organization")
                         .WithOne("Address")
-                        .HasForeignKey("Core.Models.Address", "AdrId")
+                        .HasForeignKey("Core.Models.Address", "OrgId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -9,9 +9,10 @@ namespace Core.Models
 {
     public class Organization
     {
-        public int OrgId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string NIP { get; set; }
+        public int AdrId { get; set; }
         public Address Address { get; set; }
         public Car car { get; set; }
 
