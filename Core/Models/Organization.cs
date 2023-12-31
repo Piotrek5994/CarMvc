@@ -9,7 +9,7 @@ namespace Core.Models
 {
     public class Organization
     {
-        public int Id { get; set; }
+        public int OrgId { get; set; }
         public string Name { get; set; }
         public string NIP { get; set; }
         public Address Address { get; set; }

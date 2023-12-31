@@ -15,24 +15,36 @@ namespace CarMvc
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            // Zdefiniowanie AdrId jako klucza podstawowego dla Address
             modelBuilder.Entity<Car>()
-                .HasOne(e => e.Owner)
-                .WithOne(e => e.car)
-                .HasForeignKey<Organization>(e => e.Id);
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Address>()
+                .HasKey(a => a.AdrId);
 
             modelBuilder.Entity<Organization>()
-                .HasOne(e=> e.car)
-                .WithOne(e => e.Owner)
-                .HasForeignKey<Car>(e => e.Id);
-                
-            modelBuilder.Entity<Address>()
-                .HasOne(e => e.Organization)
-                .WithOne(e => e.Address)
-                .HasForeignKey<Organization>(e => e.Id);
+                .HasKey(o => o.OrgId);
+            // Konfiguracja pozostałych encji...
 
+            // Konfiguracja dla Car i Organization
+            modelBuilder.Entity<Car>()
+                .HasOne(c => c.Owner)
+                .WithOne(o => o.car)
+                .HasForeignKey<Car>(c => c.OrganizationId);
+
+            // Konfiguracja dla Address i Organization
+            modelBuilder.Entity<Address>()
+                .HasOne(a => a.Organization)
+                .WithOne(o => o.Address)
+                .HasForeignKey<Address>(a => a.AdrId);
+
+            modelBuilder.Entity<Organization>().HasData(
+                new Organization() { OrgId = 1, Name = "Organizacja A", NIP = "1234567890", Address = null },
+                new Organization() { OrgId = 2, Name = "Organizacja B", NIP = "0987654321", Address = null }
+            );
             modelBuilder.Entity<Car>().HasData(
-            new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High},
-            new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High}
+                new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High, OrganizationId = 1},
+                new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High, OrganizationId = 2 }
             );
         }
     }

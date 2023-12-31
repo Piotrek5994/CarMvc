@@ -12,6 +12,7 @@ namespace CarMvc.Models
         public int Power { get; set; }
         public string Motor { get; set; }
         public string RegistrationNumber { get; set; }
+        public int OrganizationId { get; set; }
         public Organization Owner { get; set; }
         public Priority Priority { get; set; }
     }
