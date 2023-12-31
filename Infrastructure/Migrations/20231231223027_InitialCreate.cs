@@ -63,15 +63,15 @@ namespace Infrastructure.Migrations
                     Power = table.Column<int>(type: "INTEGER", nullable: false),
                     Motor = table.Column<string>(type: "TEXT", nullable: false),
                     RegistrationNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrgId = table.Column<int>(type: "INTEGER", nullable: false),
                     Priority = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Organization_OrganizationId",
-                        column: x => x.OrganizationId,
+                        name: "FK_Cars_Organization_OrgId",
+                        column: x => x.OrgId,
                         principalTable: "Organization",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -97,7 +97,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "Capacity", "Model", "Motor", "OrganizationId", "Power", "Priority", "Producer", "RegistrationNumber" },
+                columns: new[] { "Id", "Capacity", "Model", "Motor", "OrgId", "Power", "Priority", "Producer", "RegistrationNumber" },
                 values: new object[,]
                 {
                     { 1, 1.3999999999999999, "Octavia", "Benzyna", 1, 100, 3, "Skoda", "ABC123" },
@@ -111,9 +111,9 @@ namespace Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_OrganizationId",
+                name: "IX_Cars_OrgId",
                 table: "Cars",
-                column: "OrganizationId",
+                column: "OrgId",
                 unique: true);
         }
 

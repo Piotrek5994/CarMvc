@@ -33,7 +33,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("OrganizationId")
+                    b.Property<int>("OrgId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Power")
@@ -52,7 +52,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationId")
+                    b.HasIndex("OrgId")
                         .IsUnique();
 
                     b.ToTable("Cars");
@@ -64,7 +64,7 @@ namespace Infrastructure.Migrations
                             Capacity = 1.3999999999999999,
                             Model = "Octavia",
                             Motor = "Benzyna",
-                            OrganizationId = 1,
+                            OrgId = 1,
                             Power = 100,
                             Priority = 3,
                             Producer = "Skoda",
@@ -76,7 +76,7 @@ namespace Infrastructure.Migrations
                             Capacity = 1.3999999999999999,
                             Model = "A3",
                             Motor = "Benzyna",
-                            OrganizationId = 2,
+                            OrgId = 2,
                             Power = 100,
                             Priority = 3,
                             Producer = "Audi",
@@ -184,7 +184,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Models.Organization", "Owner")
                         .WithOne("car")
-                        .HasForeignKey("CarMvc.Models.Car", "OrganizationId")
+                        .HasForeignKey("CarMvc.Models.Car", "OrgId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

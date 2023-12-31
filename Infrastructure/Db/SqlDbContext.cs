@@ -15,27 +15,36 @@ namespace CarMvc
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            // Zdefiniowanie AdrId jako klucza podstawowego dla Address
-            modelBuilder.Entity<Car>()
-                .HasKey(c => c.Id);
-
             modelBuilder.Entity<Address>()
                 .HasKey(a => a.Id);
 
             modelBuilder.Entity<Organization>()
                 .HasKey(o => o.Id);
 
-            // Konfiguracja dla Car i Organization
-            modelBuilder.Entity<Car>()
-                .HasOne(c => c.Owner)
-                .WithOne(o => o.car)
-                .HasForeignKey<Car>(c => c.OrganizationId);
+            //Configuration for Car
+            modelBuilder.Entity<Car>(entity =>
+            {
+                entity.HasKey(c => c.Id);
 
-            // Konfiguracja dla Address i Organization
-            modelBuilder.Entity<Address>()
-                .HasOne(a => a.Organization)
-                .WithOne(o => o.Address)
-                .HasForeignKey<Address>(a => a.OrgId);
+                entity.HasOne(c => c.Owner)
+                      .WithOne(o => o.car)
+                      .HasForeignKey<Car>(c => c.OrgId);
+            });
+            // Configuration for Organization
+            modelBuilder.Entity<Organization>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                
+                entity.HasOne(a => a.Address)
+                      .WithOne(o => o.Organization)
+                      .HasForeignKey<Address>(a => a.OrgId);
+            });
+            // Configuration for Address
+            modelBuilder.Entity<Address>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+
+            });
 
             modelBuilder.Entity<Organization>().HasData(
                 new Organization() { Id = 1, Name = "Organizacja A", NIP = "1234567890", AdrId = 1 },
@@ -47,8 +56,8 @@ namespace CarMvc
                 new Address() { Id = 2, Street = "Ulica B", Number = 2, City = "Miasto B", State = "Stan B", Country = "Kraj B", OrgId = 2 }
             );
             modelBuilder.Entity<Car>().HasData(
-                new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High, OrganizationId = 1 },
-                new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High, OrganizationId = 2 }
+                new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High, OrgId = 1 },
+                new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High, OrgId = 2 }
             );
         }
     }
