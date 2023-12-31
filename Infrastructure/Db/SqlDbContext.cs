@@ -37,8 +37,12 @@ namespace CarMvc
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.HasKey(o => o.Id);
-
             });
+
+            modelBuilder.Entity<Car>().HasData(
+                new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High, OrgId = 1 },
+                new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High, OrgId = 2 }
+            );
 
             modelBuilder.Entity<Organization>().HasData(
                 new Organization() { Id = 1, Name = "Organizacja A", NIP = "1234567890", AdrId = 1 },
@@ -48,10 +52,6 @@ namespace CarMvc
             modelBuilder.Entity<Address>().HasData(
                 new Address() { Id = 1, Street = "Ulica A", Number = 1, City = "Miasto A", State = "Stan A", Country = "Kraj A", OrgId = 1 },
                 new Address() { Id = 2, Street = "Ulica B", Number = 2, City = "Miasto B", State = "Stan B", Country = "Kraj B", OrgId = 2 }
-            );
-            modelBuilder.Entity<Car>().HasData(
-                new Car() { Id = 1, Model = "Octavia", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Skoda", RegistrationNumber = "ABC123", Priority = Priority.High, OrgId = 1 },
-                new Car() { Id = 2, Model = "A3", Capacity = 1.4, Motor = "Benzyna", Power = 100, Producer = "Audi", RegistrationNumber = "DEF456", Priority = Priority.High, OrgId = 2 }
             );
         }
     }
