@@ -15,12 +15,6 @@ namespace CarMvc
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Address>()
-                .HasKey(a => a.Id);
-
-            modelBuilder.Entity<Organization>()
-                .HasKey(o => o.Id);
-
             //Configuration for Car
             modelBuilder.Entity<Car>(entity =>
             {
