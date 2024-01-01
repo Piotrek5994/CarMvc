@@ -1,5 +1,21 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Core.Models.Car
 @{
 }
+
+<h1>Dane samochodu o numerze rejestracyjnym @Model.RegistrationNumber to:</h1>
+<p>Model - @Model.Model</p>
+<p>Producent - @Model.Producer</p>
+<p>Pojemność silnika - @Model.Capacity</p>
+<p>Moc silnika - @Model.Power</p>
+<p>Rodzaj silnika - @Model.Motor</p>
+<p>Numery rejestracyjne - @Model.RegistrationNumber</p>
+@if (Model.Owner is not null)
+{
+    <p>Właściciel - @Model.Owner</p>
+}
+<p>Priorytet - @Model.Priority</p>
+
+
+<form asp-action="Details" method="post">
+    <button class="btn btn-primary" action="Index">Powrót do Kontaktów</button>
+</form>
