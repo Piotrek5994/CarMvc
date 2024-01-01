@@ -15,7 +15,5 @@ namespace Core.Models
         public int AdrId { get; set; }
         public Address Address { get; set; }
         public Car car { get; set; }
-
-
     }
 }

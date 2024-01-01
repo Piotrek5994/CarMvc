@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarMvc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Infrastructure.Services.IServices
 {
     public interface ICarService
     {
+        Task<IEnumerable<Car>> GetAll();
     }
 }

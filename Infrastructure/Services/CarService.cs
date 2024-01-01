@@ -1,4 +1,6 @@
-﻿using Core.IRepositories;
+﻿using CarMvc.Models;
+using Core.IRepositories;
+using Infrastructure.EntityModel;
 using Infrastructure.Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,11 @@ namespace Infrastructure.Services
         public CarService(ICarRepositories repositories)
         {
             _repositories = repositories;
+        }
+        public async Task<IEnumerable<Car>> GetAll()
+        {
+            var cars = await _repositories.GetAll();
+            return cars;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarMvc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace Core.IRepositories
 {
     public interface ICarRepositories
     {
+        Task<IEnumerable<Car>> GetAll();
+        Task AddCar(Car car);
     }
 }

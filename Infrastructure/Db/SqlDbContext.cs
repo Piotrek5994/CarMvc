@@ -6,7 +6,9 @@ namespace CarMvc
 {
     public class SqlDbContext : DbContext
     {
-        DbSet<Car> Cars { get; set; }
+        public DbSet<Car> Car { get; set; }
+        public DbSet<Organization> Organization { get; set; }
+        public DbSet<Address> Address { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
