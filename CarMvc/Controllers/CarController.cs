@@ -17,8 +17,6 @@ namespace CarMvc.Controllers
 
         [HttpGet]
         [HttpGet("{id}")]
-        [HttpGet]
-        [HttpGet("{id}")]
         public async Task<IActionResult> Index(int? id)
         {
             var cars = await _service.Get(id);
