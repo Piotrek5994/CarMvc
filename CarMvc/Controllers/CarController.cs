@@ -13,9 +13,15 @@ namespace CarMvc.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Index(int? id)
+        [HttpGet] // Dla wyświetlania wszystkich samochodów
+        public async Task<IActionResult> Index()
+        {
+            var cars = await _service.Get(null);
+            return View(cars);
+        }
+
+        [HttpGet("{id}")] // Dla wyświetlania samochodu o konkretnym ID
+        public async Task<IActionResult> Index(int id)
         {
             var cars = await _service.Get(id);
             return View(cars);
