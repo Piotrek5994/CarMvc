@@ -15,7 +15,7 @@ namespace CarMvc
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite("Data Source=C:\\Users\\piotr\\Desktop\\ProjektyC#\\CarMvc\\car.db");
+            options.UseSqlite("Data Source=..\\car.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
