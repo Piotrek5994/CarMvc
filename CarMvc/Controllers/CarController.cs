@@ -23,16 +23,45 @@ namespace CarMvc.Controllers
             return View(cars);
         }
         [HttpGet]
-        //Służy do stworzenia vidoku przy dodawaniu
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
-            return View();
+            return View(new Car()); // Zwraca widok z pustym modelem Car
         }
+
         [HttpPost]
-        //Służy do dodania użytkownika
         public async Task<IActionResult> Add(Car car)
         {
-            return RedirectToAction("Add");
+            if (ModelState.IsValid)
+            {
+                await _service.AddCar(car);
+                return RedirectToAction("Index"); // Przekierowanie do listy samochodów po pomyślnym dodaniu
+            }
+            return View(car); // Zwróć ten sam widok w przypadku błędów walidacji
+        }
+
+        // Metoda GET do wyświetlenia formularza edycji
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var cars = await _service.Get(id);
+            var car = cars.FirstOrDefault(); // Zakładamy, że Get zwraca kolekcję
+            if (car == null)
+            {
+                return NotFound();
+            }
+            return View(car);
+        }
+
+        // Metoda POST do przetwarzania formularza edycji
+        [HttpPost]
+        public async Task<IActionResult> Edit(Car car)
+        {
+            if (ModelState.IsValid)
+            {
+                    await _service.UpdateCar(car);
+                    return RedirectToAction("Index");
+            }
+            return View(car);
         }
     }
 }

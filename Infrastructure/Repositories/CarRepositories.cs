@@ -38,7 +38,16 @@ namespace Infrastructure.Repositories
         }
         public async Task UpdateCar(Car car)
         {
-
+            var existingCar = await _context.Car.FindAsync(car.Id);
+            if (existingCar != null)
+            {
+                _context.Entry(existingCar).CurrentValues.SetValues(car);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException($"Samochód o ID {car.Id} nie został znaleziony.");
+            }
         }
         public async Task DeleteCar(int carId)
         {

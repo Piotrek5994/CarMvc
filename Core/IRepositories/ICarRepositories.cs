@@ -11,5 +11,6 @@ namespace Core.IRepositories
     {
         Task<IEnumerable<Car>> Get(int? carId);
         Task AddCar(Car car);
+        Task UpdateCar(Car car);
     }
 }
