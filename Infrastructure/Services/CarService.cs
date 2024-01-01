@@ -31,5 +31,9 @@ namespace Infrastructure.Services
         {
             await _repositories.UpdateCar(car);
         }
+        public async Task DeleteCar(int carId)
+        {
+            await _repositories.DeleteCar(carId);
+        }
     }
 }

@@ -51,7 +51,16 @@ namespace Infrastructure.Repositories
         }
         public async Task DeleteCar(int carId)
         {
-
+            var carToDelete = await _context.Car.FindAsync(carId);
+            if (carToDelete != null)
+            {
+                _context.Car.Remove(carToDelete);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException($"Samochód o ID {carId} nie został znaleziony.");
+            }
         }
     }
 }

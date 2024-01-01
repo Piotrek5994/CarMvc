@@ -12,5 +12,6 @@ namespace Infrastructure.Services.IServices
         Task<IEnumerable<Car>> Get(int? carId);
         Task AddCar(Car car);
         Task UpdateCar(Car car);
+        Task DeleteCar(int carId);
     }
 }

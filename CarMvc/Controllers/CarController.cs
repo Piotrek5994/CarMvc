@@ -1,6 +1,4 @@
 ﻿using CarMvc.Models;
-using Infrastructure.EntityModel;
-using Infrastructure.Services;
 using Infrastructure.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,10 +56,17 @@ namespace CarMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                    await _service.UpdateCar(car);
-                    return RedirectToAction("Index");
+                await _service.UpdateCar(car);
+                return RedirectToAction("Index");
             }
             return View(car);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteCar(id);
+            return RedirectToAction("Index");
         }
     }
 }
