@@ -12,8 +12,8 @@ namespace Core.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string NIP { get; set; }
-        public int AdrId { get; set; }
-        public Address Address { get; set; }
-        public Car car { get; set; }
+        public int? AdrId { get; set; }
+        public Address? Address { get; set; }
+        public Car? car { get; set; }
     }
 }

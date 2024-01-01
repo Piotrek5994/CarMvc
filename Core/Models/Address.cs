@@ -14,7 +14,7 @@ namespace Core.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public int OrgId { get; set; }
-        public Organization Organization { get; set; }
+        public int? OrgId { get; set; }
+        public Organization? Organization { get; set; }
     }
 }

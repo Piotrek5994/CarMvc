@@ -20,7 +20,7 @@ namespace Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     NIP = table.Column<string>(type: "TEXT", nullable: false),
-                    AdrId = table.Column<int>(type: "INTEGER", nullable: false)
+                    AdrId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -38,7 +38,7 @@ namespace Infrastructure.Migrations
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     State = table.Column<string>(type: "TEXT", nullable: false),
                     Country = table.Column<string>(type: "TEXT", nullable: false),
-                    OrgId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrgId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,8 +47,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Address_Organization_OrgId",
                         column: x => x.OrgId,
                         principalTable: "Organization",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -63,7 +62,7 @@ namespace Infrastructure.Migrations
                     Power = table.Column<int>(type: "INTEGER", nullable: false),
                     Motor = table.Column<string>(type: "TEXT", nullable: false),
                     RegistrationNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    OrgId = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrgId = table.Column<int>(type: "INTEGER", nullable: true),
                     Priority = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -73,8 +72,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Car_Organization_OrgId",
                         column: x => x.OrgId,
                         principalTable: "Organization",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
