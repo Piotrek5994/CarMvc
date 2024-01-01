@@ -13,14 +13,14 @@ namespace CarMvc.Controllers
             _service = service;
         }
 
-        [HttpGet] // Dla wyświetlania wszystkich samochodów
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var cars = await _service.Get(null);
             return View(cars);
         }
 
-        [HttpGet("Car/{id}")] // Dla wyświetlania samochodu o konkretnym ID
+        [HttpGet("Car/{id}")]
         public async Task<IActionResult> Index(int id)
         {
             var cars = await _service.Get(id);
@@ -30,7 +30,7 @@ namespace CarMvc.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View(new Car()); // Zwraca widok z pustym modelem Car
+            return View(new Car());
         }
 
         [HttpPost]
@@ -39,17 +39,17 @@ namespace CarMvc.Controllers
             if (ModelState.IsValid)
             {
                 await _service.AddCar(car);
-                return RedirectToAction("Index"); // Przekierowanie do listy samochodów po pomyślnym dodaniu
+                return RedirectToAction("Index");
             }
-            return View(car); // Zwróć ten sam widok w przypadku błędów walidacji
+            return View(car);
         }
 
-        // Metoda GET do wyświetlenia formularza edycji
+        // GET method to display the edit form
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var cars = await _service.Get(id);
-            var car = cars.FirstOrDefault(); // Zakładamy, że Get zwraca kolekcję
+            var car = cars.FirstOrDefault();
             if (car == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace CarMvc.Controllers
             return View(car);
         }
 
-        // Metoda POST do przetwarzania formularza edycji
+        // POST method for processing the edit form
         [HttpPost]
         public async Task<IActionResult> Edit(Car car)
         {
