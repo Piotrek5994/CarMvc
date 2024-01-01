@@ -27,7 +27,9 @@ namespace Infrastructure.Repositories
                          .ThenInclude(c => c.Address)
                          .AsQueryable();
             if(carId != null)
+            {
                 query = query.Where(x => x.Id == carId);
+            }
 
             return await query.ToListAsync();
         }
