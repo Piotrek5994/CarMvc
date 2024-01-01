@@ -26,6 +26,7 @@ namespace CarMvc.Controllers
             var cars = await _service.Get(id);
             return View(cars);
         }
+
         [HttpGet]
         public IActionResult Add()
         {
