@@ -75,5 +75,17 @@ namespace CarMvc.Controllers
             await _service.DeleteCar(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet("Car/View/{id}")]
+        public async Task<IActionResult> View(int id)
+        {
+            var car = await _service.Get(id);
+            if (car == null || !car.Any())
+            {
+                return NotFound();
+            }
+
+            return View(car.FirstOrDefault());
+        }
     }
 }
