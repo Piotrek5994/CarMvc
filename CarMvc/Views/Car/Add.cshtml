@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CarMvc.Models.Car;
+@{}
+
+<h1>Dodaj nowy samochód</h1>
+<form asp-controller="Car" asp-action="Add" method="post">
+    <div class="mb-3">
+        <label asp-for="Model"></label>
+        <input class="form-control" asp-for="Model" />
+        <span class="text-danger" asp-validation-for="Model"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Producer"></label>
+        <input class="form-control" asp-for="Producer" />
+        <span class="text-danger" asp-validation-for="Producer"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Capacity"></label>
+        <input class="form-control" asp-for="Capacity" />
+        <span class="text-danger" asp-validation-for="Capacity"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Power"></label>
+        <input class="form-control" asp-for="Power" />
+        <span class="text-danger" asp-validation-for="Power"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="RegistrationNumber"></label>
+        <input class="form-control" asp-for="RegistrationNumber" />
+        <span class="text-danger" asp-validation-for="RegistrationNumber"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Motor"></label>
+        <input class="form-control" asp-for="Motor" />
+        <span class="text-danger" asp-validation-for="Motor"></span>
+    </div>
+
+    @* dodać organizację *@
+    <input type="hidden" value="1" asp-for="OrgId" />
+
+    <div class="mb-3">
+        <label asp-for="Priority"></label>
+        <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+        <span class="text-danger" asp-validation-for="Priority"></span>
+    </div>
+  
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit" formmethod="post">Utwórz</button>
+    </div>
+</form>

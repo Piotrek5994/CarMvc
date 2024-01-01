@@ -27,13 +27,13 @@ namespace CarMvc.Controllers
             return View(cars);
         }
 
-        [HttpGet]
+        [HttpGet("Car/Add")]
         public IActionResult Add()
         {
             return View(new Car());
         }
 
-        [HttpPost]
+        [HttpPost("Car/Add")]
         public async Task<IActionResult> Add(Car car)
         {
             if (ModelState.IsValid)

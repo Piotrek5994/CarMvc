@@ -17,7 +17,7 @@ namespace CarMvc
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<ICarService,CarService>();
+            builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<ICarRepositories, CarRepositories>();
 
             var app = builder.Build();
