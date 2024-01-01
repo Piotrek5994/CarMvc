@@ -16,10 +16,13 @@ namespace CarMvc.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [HttpGet("{id}")]
+        [HttpGet]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Index(int? id)
         {
-            var result = await _service.GetAll();
-            return View(result);
+            var cars = await _service.Get(id);
+            return View(cars);
         }
         [HttpGet]
         //Służy do stworzenia vidoku przy dodawaniu

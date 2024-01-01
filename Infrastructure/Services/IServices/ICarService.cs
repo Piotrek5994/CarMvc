@@ -9,6 +9,6 @@ namespace Infrastructure.Services.IServices
 {
     public interface ICarService
     {
-        Task<IEnumerable<Car>> GetAll();
+        Task<IEnumerable<Car>> Get(int? carId);
     }
 }

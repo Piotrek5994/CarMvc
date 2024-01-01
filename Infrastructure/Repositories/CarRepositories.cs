@@ -20,17 +20,29 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Car>> GetAll()
+        public async Task<IEnumerable<Car>> Get(int? carId)
         {
-            return await _context.Car
+            var query = _context.Car
                          .Include(c => c.Owner)
                          .ThenInclude(c => c.Address)
-                         .ToListAsync();
+                         .AsQueryable();
+            if(carId != null)
+                query = query.Where(x => x.Id == carId);
+
+            return await query.ToListAsync();
         }
         public async Task AddCar(Car car)
         {
             await _context.Car.AddAsync(car);
             await _context.SaveChangesAsync();
+        }
+        public async Task UpdateCar(Car car)
+        {
+
+        }
+        public async Task DeleteCar(int carId)
+        {
+
         }
     }
 }

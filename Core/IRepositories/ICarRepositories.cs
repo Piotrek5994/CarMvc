@@ -9,7 +9,7 @@ namespace Core.IRepositories
 {
     public interface ICarRepositories
     {
-        Task<IEnumerable<Car>> GetAll();
+        Task<IEnumerable<Car>> Get(int? carId);
         Task AddCar(Car car);
     }
 }

@@ -18,10 +18,9 @@ namespace Infrastructure.Services
         {
             _repositories = repositories;
         }
-        public async Task<IEnumerable<Car>> GetAll()
+        public async Task<IEnumerable<Car>> Get(int? carId)
         {
-            var cars = await _repositories.GetAll();
-            return cars;
+            return await _repositories.Get(carId);
         }
     }
 }
