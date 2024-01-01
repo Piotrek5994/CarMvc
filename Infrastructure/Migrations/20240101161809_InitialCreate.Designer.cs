@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    [Migration("20231231232406_InitialCreate")]
+    [Migration("20240101161809_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,7 +58,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("OrgId")
                         .IsUnique();
 
-                    b.ToTable("Cars");
+                    b.ToTable("Car");
 
                     b.HasData(
                         new

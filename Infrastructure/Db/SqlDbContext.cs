@@ -9,7 +9,10 @@ namespace CarMvc
         public DbSet<Car> Car { get; set; }
         public DbSet<Organization> Organization { get; set; }
         public DbSet<Address> Address { get; set; }
+        public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
+        {
 
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlite("Data Source=C:\\Users\\piotr\\Desktop\\Projekty C#\\CarMvc\\car.db");

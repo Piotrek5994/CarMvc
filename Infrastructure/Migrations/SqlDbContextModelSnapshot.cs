@@ -55,7 +55,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("OrgId")
                         .IsUnique();
 
-                    b.ToTable("Cars");
+                    b.ToTable("Car");
 
                     b.HasData(
                         new

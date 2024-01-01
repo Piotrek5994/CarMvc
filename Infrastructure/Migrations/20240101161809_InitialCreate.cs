@@ -52,7 +52,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "Car",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -68,9 +68,9 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.PrimaryKey("PK_Car", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Organization_OrgId",
+                        name: "FK_Car_Organization_OrgId",
                         column: x => x.OrgId,
                         principalTable: "Organization",
                         principalColumn: "Id",
@@ -96,7 +96,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cars",
+                table: "Car",
                 columns: new[] { "Id", "Capacity", "Model", "Motor", "OrgId", "Power", "Priority", "Producer", "RegistrationNumber" },
                 values: new object[,]
                 {
@@ -111,8 +111,8 @@ namespace Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_OrgId",
-                table: "Cars",
+                name: "IX_Car_OrgId",
+                table: "Car",
                 column: "OrgId",
                 unique: true);
         }
@@ -124,7 +124,7 @@ namespace Infrastructure.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "Cars");
+                name: "Car");
 
             migrationBuilder.DropTable(
                 name: "Organization");

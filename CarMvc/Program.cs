@@ -12,10 +12,12 @@ namespace CarMvc
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<SqlDbContext>(options =>
+                    options.UseSqlite(builder.Configuration.GetConnectionString("localDb")));
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<ICarService,CarService>();
-            builder.Services.AddSingleton<ICarRepositories, CarRepositories>();
+            builder.Services.AddScoped<ICarService,CarService>();
+            builder.Services.AddScoped<ICarRepositories, CarRepositories>();
 
             var app = builder.Build();
 
